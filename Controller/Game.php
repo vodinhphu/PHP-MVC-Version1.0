@@ -27,7 +27,7 @@ function index()
 		$data_cat = $this->dataCat;// $this->model->getCat();
 		$data_pub = $this->dataPub;//$this->model->getPub();
 		$subview = 'game_index.php';
-		include "View/layout1.php";
+		include "View/trangchu.php";
 	}
 
 function bookCat()
