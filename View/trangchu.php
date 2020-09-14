@@ -15,7 +15,7 @@ a{
 }
 .jumbotron {
   /*background-color: #f4511e;*/ /* Orange */
-  background-image: url('images/banner-3');
+  background-image: url('images/banner-3.jpg');
   color: #ffffff;
   height: 400px;
   padding: 100px 25px;
