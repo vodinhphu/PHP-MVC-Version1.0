@@ -68,7 +68,7 @@ function show()
 		$data_cat = $this->dataCat;
 		$data_pub = $this->dataPub;
 		$subview = 'product_detail.php';
-		include "View/layout1.php";
+		include "View/trangchu.php";
 	}
 
 	function update()

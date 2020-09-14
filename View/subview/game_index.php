@@ -12,7 +12,7 @@
     </div>
     <div class="panel-footer">
       <h3>$<?php echo $value['price']?></h3>
-      <button class="btn btn-lg"><a href='detail-<?php echo chuanHoaChuoi($value['pro_name']) ?>-<?php echo $value['product_id'] ?>.html'>Details</a></button>
+      <button class="btn btn-lg" onclick="location.href='detail-<?php echo chuanHoaChuoi($value['pro_name']) ?>-<?php echo $value['product_id'] ?>.html';">Details</button>
     </div>
   </div>
 </div>
