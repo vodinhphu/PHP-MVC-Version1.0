@@ -10,7 +10,7 @@ RewriteRule ^trangchu index.php
 RewriteRule ^product.html  index.php?Controller=Book
 RewriteRule ^category-(.*)-(.*).html  index.php?Controller=Book&action=bookcat&cat_id=$2 [L]
 
-RewriteRule ^detail-(.*)-(.*).html index.php?Controller=Book&action=detail&id=$2 [L]
+RewriteRule ^detail-(.*)-(.*).html index.php?Controller=Game&action=detail&id=$2 [L]
 RewriteRule ^user.html  index.php?controller=User
 RewriteRule ^admin.php index.php?controller=Admin&action=index
 

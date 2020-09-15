@@ -17,7 +17,7 @@ a{
   /*background-color: #f4511e;*/ /* Orange */
   background-image: url('images/banner-3.jpg');
   color: #ffffff;
-  height: 700px;
+  height: 400px;
   padding: 100px 25px;
 }
 .bg-grey {
@@ -91,8 +91,35 @@ a{
 .panel-footer h3{
   margin:0;
 }
+.navbar {
+  margin-bottom: 0;
+  background-color: #f4511e;
+  z-index: 9999;
+  border: 0;
+  font-size: 12px !important;
+  line-height: 1.42857143 !important;
+  letter-spacing: 4px;
+  border-radius: 0;
+}
+
+.navbar li a, .navbar .navbar-brand {
+  color: #fff !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+  color: #f4511e !important;
+  background-color: #fff !important;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+  color: #fff !important;
+}
 </style>
 <body>
+
+<!-- MENU -->
+<?php include ROOT . "/View/subview/menu.php" ;?>
 
 <div class="jumbotron text-center ">
   <h1>SMARTOSC GAME STORE</h1>
