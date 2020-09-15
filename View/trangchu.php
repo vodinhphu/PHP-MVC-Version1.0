@@ -17,7 +17,7 @@ a{
   /*background-color: #f4511e;*/ /* Orange */
   background-image: url('images/banner-3.jpg');
   color: #ffffff;
-  height: 400px;
+  height: 700px;
   padding: 100px 25px;
 }
 .bg-grey {
