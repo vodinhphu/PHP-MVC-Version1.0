@@ -30,6 +30,88 @@ class Admin
 		$admin_sub_view='admin_index.php';
 		include ROOT ."/View/admin_layout1.php";
 	}
+	function import()
+	{
+		$this->model= new Model_Game();
+		$data = $this->model->getGame();
+		include ROOT ."/View/subview/import.php";
+	}
+	function postImport()
+	{
+		$conn = new \mysqli('localhost', 'root', '', 'gamestore');
+		if (mysqli_connect_errno()) {
+            trigger_error("Problem with connecting to database.");
+        }
+
+        $conn->set_charset("utf8");
+
+		$this->model= new Model_Game();
+		$data = $this->model->getGame();
+		if (isset($_POST["import"])) {
+		    
+		    $fileName = $_FILES["file"]["tmp_name"];
+		    
+		    if ($_FILES["file"]["size"] > 0) {
+		        
+		        $file = fopen($fileName, "r");
+		        
+		        while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
+		            
+		            $product_id = "";
+		            if (isset($column[0])) {
+		                $product_id = mysqli_real_escape_string($conn, $column[0]);
+		            }
+		            $pro_name = "";
+		            if (isset($column[1])) {
+		                $pro_name = mysqli_real_escape_string($conn, $column[1]);
+		            }
+		            $price = "";
+		            if (isset($column[2])) {
+		                $price = mysqli_real_escape_string($conn, $column[2]);
+		            }
+		            $image = "";
+		            if (isset($column[3])) {
+		                $image = mysqli_real_escape_string($conn, $column[3]);
+		            }
+		            $producer = "";
+		            if (isset($column[4])) {
+		                $producer = mysqli_real_escape_string($conn, $column[4]);
+		            }
+		            $quantity_available = "";
+		            if (isset($column[5])) {
+		                $quantity_available = mysqli_real_escape_string($conn, $column[5]);
+		            }
+		            $details = "";
+		            if (isset($column[6])) {
+		                $details = mysqli_real_escape_string($conn, $column[6]);
+		            }
+		            
+		            $sqlInsert = "INSERT into game (product_id,pro_name,price,image,producer,quantity_available,details)
+		                   values (?,?,?,?,?,?,?)";
+		            $paramType = "isissis";
+		            $paramArray = array(
+		                $product_id,
+		                $pro_name,
+		                $price,
+		                $image,
+		                $producer,
+		                $quantity_available,
+		                $details
+		            );
+		            $insertId = $this->model->insertPro($sqlInsert, $paramType, $paramArray);
+		            
+		            if (! empty($insertId)) {
+		                $type = "success";
+		                $message = "CSV Data Imported into the Database";
+		            } else {
+		                $type = "error";
+		                $message = "Problem in Importing CSV Data";
+		            }
+		        }
+		    }
+		}
+		header('location:index.php?controller=Admin&action=import');
+	}
 	function deletebook()
 	{
 		$book_id= getIndex('book_id');

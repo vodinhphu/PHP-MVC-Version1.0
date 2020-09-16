@@ -86,20 +86,28 @@
 			<ul id="main-nav">  <!-- Accordion Menu -->
 				
 				<li>
-					<a href="<?php echo BASE_URL ?>/admin.php" class="nav-top-item no-submenu"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+					<a href="<?php echo BASE_URL ?>/index.php?controller=Admin&action=index" class="nav-top-item no-submenu"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
 						Dashboard
 					</a>       
 				</li>
 				
 				<li> 
-					<a href="<?php echo BASE_URL ?>/admincp/#" class="nav-top-item current"> <!-- Add the class "current" to current menu item -->
-					Articles
+					<a href="<?php echo BASE_URL ?>/index.php?controller=Admin&action=index" class="nav-top-item current"> <!-- Add the class "current" to current menu item -->
+					Product
 					</a>
 					<ul>
-						<li><a href="<?php echo BASE_URL ?>/admincp/#">Write a new Article</a></li>
-						<li><a class="current" href="<?php echo BASE_URL ?>/admincp/#">Manage Articles</a></li> <!-- Add class "current" to sub menu items also -->
-						<li><a href="<?php echo BASE_URL ?>/admincp/#">Manage Comments</a></li>
-						<li><a href="<?php echo BASE_URL ?>/admincp/#">Manage Categories</a></li>
+						<li><a class="current" href="<?php echo BASE_URL ?>/index.php?controller=Admin&action=index">Product list</a></li>
+						<!-- <li><a  href="<?php echo BASE_URL ?>/admincp/#">Manage Articles</a></li> --> <!-- Add class "current" to sub menu items also -->
+				<!-- 		<li><a href="<?php echo BASE_URL ?>/admincp/#">Manage Comments</a></li>
+						<li><a href="<?php echo BASE_URL ?>/admincp/#">Manage Categories</a></li> -->
+					</ul>
+				</li>
+				<li> 
+					<a href="index.php?controller=Admin&action=import" class="nav-top-item"> <!-- Add the class "current" to current menu item -->
+					Import
+					</a>
+					<ul>
+						<li><a  href="<?php echo BASE_URL ?>/index.php?controller=Admin&action=import">IMPORT</a></li>
 					</ul>
 				</li>
 				
@@ -117,8 +125,7 @@
 			
 
 			<!-- Page Head -->
-			<h2>Welcome John</h2>
-			<p id="page-intro">What would you like to do?</p>
+		
 				
 			</ul><!-- End .shortcut-buttons-set -->
 			

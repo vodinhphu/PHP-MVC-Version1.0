@@ -23,6 +23,7 @@
 								 if (isset($_SESSION['info'])) echo $_SESSION['info'];
 								 unset($_SESSION['info']);
 								  ?></div>
+						
 						<table id="tbl_book">
 							
 							<thead>

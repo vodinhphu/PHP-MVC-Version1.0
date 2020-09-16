@@ -1,35 +1,77 @@
 <?php
-class Database
+/**
+ * Copyright (C) 2019 Phppot
+ *
+ * Distributed under MIT license with an exception that,
+ * you don’t have to include the full MIT License in your code.
+ * In essense, you can use it on commercial software, modify and distribute free.
+ * Though not mandatory, you are requested to attribute this URL in your code or website.
+ */
+namespace Phppot;
+
+/**
+ * Generic datasource class for handling DB operations.
+ * Uses MySqli and PreparedStatements.
+ *
+ * @version 2.5 - recordCount function added
+ */
+class DataSource
 {
-	public  $conn=null;
-	function __construct()
-	{
-		$this->conn = new PDO("mysql:host=". HOST_DB.";dbname=". DB, USER_DB,PASS_DB);
-		$this->conn->query('set names utf8');
 
-	}
+    // PHP 7.1.0 visibility modifiers are allowed for class constants.
+    // when using above 7.1.0, declare the below constants as private
+    const HOST = 'localhost';
 
-	function getTable($tableName)
-	{
-		$stm = $this->conn->prepare("select * from $tableName");
-		$stm->execute();
-		return $stm->fetchAll();
-	}
+    const USERNAME = 'root';
 
-	function selectQuery($sql, $arr=array())
-	{
-		$stm = $this->conn->prepare($sql);
-		$stm->execute($arr);
-		return $stm->fetchAll(PDO::FETCH_ASSOC);
-	}
-	function updateQuery($sql, $arr=array())
-	{
-		$stm = $this->conn->prepare($sql);
-		$stm->execute($arr);
-		
-		return $stm->rowCount();
-	}
-	public function select($query, $paramType = "", $paramArray = array())
+    const PASSWORD = '';
+
+    const DATABASENAME = 'gamestore';
+
+    private $conn;
+
+    /**
+     * PHP implicitly takes care of cleanup for default connection types.
+     * So no need to worry about closing the connection.
+     *
+     * Singletons not required in PHP as there is no
+     * concept of shared memory.
+     * Every object lives only for a request.
+     *
+     * Keeping things simple and that works!
+     */
+    function __construct()
+    {
+        $this->conn = $this->getConnection();
+    }
+
+    /**
+     * If connection object is needed use this method and get access to it.
+     * Otherwise, use the below methods for insert / update / etc.
+     *
+     * @return \mysqli
+     */
+    public function getConnection()
+    {
+        $conn = new \mysqli(self::HOST, self::USERNAME, self::PASSWORD, self::DATABASENAME);
+
+        if (mysqli_connect_errno()) {
+            trigger_error("Problem with connecting to database.");
+        }
+
+        $conn->set_charset("utf8");
+        return $conn;
+    }
+
+    /**
+     * To get database results
+     *
+     * @param string $query
+     * @param string $paramType
+     * @param array $paramArray
+     * @return array
+     */
+    public function select($query, $paramType = "", $paramArray = array())
     {
         $stmt = $this->conn->prepare($query);
 
@@ -61,13 +103,7 @@ class Database
      */
     public function insert($query, $paramType, $paramArray)
     {
-        $conn = new \mysqli('localhost', 'root', '', 'gamestore');
-        if (mysqli_connect_errno()) {
-            trigger_error("Problem with connecting to database.");
-        }
-
-        $conn->set_charset("utf8");
-        $stmt = $conn->prepare($query);
+        $stmt = $this->conn->prepare($query);
         $this->bindQueryParams($stmt, $paramType, $paramArray);
 
         $stmt->execute();
