@@ -79,28 +79,29 @@ function show()
 
 	function insert()
 	{
+
 		$_SESSION['info']='';
 		$arr = array();
-		$arr[] = postIndex('book_id');
+		$arr[] = postIndex('pro_name');
 		/*if ($this->EXISTS_ID('book', 'book_id', $arr['book_id'] ))
 		{
 			return -1;//da co book_id trong table sach
 		}*/
 
-		$arr[] 	= postIndex('book_name');
-		$arr[] = postIndex('description');
-		$arr[] 		= postIndex('price', 0);
-		$arr[] 		= postIndex('pub_id');
-		$arr[] 		= postIndex('cat_id');
-		$sql="insert into book(book_id, book_name, description, price, pub_id, cat_id ";
+		$arr[] 	= postIndex('price');
+		$arr[] = postIndex('producer');
+		$arr[] 		= postIndex('quantity_available');
+		$arr[] 		= postIndex('details');
+		$sql="insert into game(pro_name, price, producer, quantity_available, details ";
 		if ($_FILES['img']['error'] ==0)
 		{
 			move_uploaded_file($_FILES['img']['tmp_name'], UPLOAD_IMG .$_FILES['img']['name']);
 			$arr[] 		= $_FILES['img']['name'];
-			$sql .=", img ";
+			$sql .=", image ";
 		}
 
 		$sql .=")";
+		
 		if (Count($arr)==6)
 		$sql .=" values(?, ?, ?, ?, ?, ?)";
 		else
@@ -108,18 +109,15 @@ function show()
 		$n= $this->model->updateQuery($sql, $arr);
 		if ($n==1)
 		{
-			$_SESSION['info']="Đã thêm sách mã ". $arr[0];
-			header('location:index.php?controller=CBook');
+			$_SESSION['info']="Đã thêm  ". $arr[0];
+			header('location:index.php?controller=Admin');
+			exit;
 		}
 		else
 			{
 			$_SESSION['info']="Lỗi thêm... ". $arr[0];
 
-			?>
-			<script type="text/javascript">
-				window.history.go(-1);
-			</script>
-			<?php
+	
 		}
 
 	}

@@ -18,7 +18,11 @@
 					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
 						
 						
-						
+						<div id="info"><?php
+								
+								 if (isset($_SESSION['info'])) echo $_SESSION['info'];
+								 unset($_SESSION['info']);
+								  ?></div>
 						<table id="tbl_book">
 							
 							<thead>
@@ -68,11 +72,11 @@
 									<td><?php echo $value['producer'] ?></td>
 									<td>
 										<!-- Icons -->
-										 <a href="<?php echo BASE_URL ?>/?controller=Admin&action=edit&book_id=<?php echo $value['book_id'] ?>" title="Edit Meta"><img src="<?php echo BASE_URL ?>/admincp/resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete" onClick="DeleteBook('<?php echo $value['book_id'] ?>'); ">
+										 <a href="<?php echo BASE_URL ?>/?controller=Admin&action=edit&product_id=<?php echo $value['product_id'] ?>" title="Edit Meta"><img src="<?php echo BASE_URL ?>/admincp/resources/images/icons/pencil.png" alt="Edit" /></a>
+										 <a href="#" title="Delete" onClick="DeleteBook('<?php echo $value['product_id'] ?>'); ">
 										 	<img src="<?php echo BASE_URL ?>/admincp/resources/images/icons/cross.png" alt="Delete" />
 										 </a> 
-										 <a href="<?php echo BASE_URL ?>/?controller=Admin&action=edit&book_id=<?php echo $value['book_id'] ?>" title="Edit Meta">
+										 <a href="<?php echo BASE_URL ?>/?controller=Admin&action=edit&book_id=<?php echo $value['product_id'] ?>" title="Edit Meta">
 										 	<img src="<?php echo BASE_URL ?>/admincp/resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" />
 										 </a>
 									</td>
@@ -88,33 +92,37 @@
 					
 					<div class="tab-content" id="tab2">
 					
-						<form action="#" method="post">
+						<form action="index.php?controller=Game&action=insert" method="post" enctype="multipart/form-data">
 							
 							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
 								
-							
+								<div id="info"><?php
+								
+								 if (isset($_SESSION['info'])) echo $_SESSION['info'];
+								 unset($_SESSION['info']);
+								  ?></div>
 								
 								<p>
 									<label>Product name</label>
-									<input class="text-input medium-input" type="text" id="medium-input" name="medium-input" /> 
+									<input class="text-input medium-input" type="text" id="medium-input" name="pro_name" /> 
 								</p>
 								<p>
 									<label>Price</label>
-									<input class="text-input medium-input" type="text" id="medium-input" name="medium-input" /> 
+									<input class="text-input medium-input" type="text" id="medium-input" name="price" /> 
 								</p>
 								<p>
 									<label>Producer</label>
-									<input class="text-input medium-input" type="text" id="medium-input" name="medium-input" /> 
+									<input class="text-input medium-input" type="text" id="medium-input" name="producer" /> 
 								</p>
 								<p>
 									<label>Quantity</label>
-									<input class="text-input medium-input" type="text" id="medium-input" name="medium-input" /> 
+									<input class="text-input medium-input" type="text" id="medium-input" name="quantity_available" /> 
 								</p>
 								
 								
 								<p>
 									<label>Image</label>
-									<input type="file" name="file" /><br />
+									<input type="file" name="img" /><br />
 									
 								</p>
 								
@@ -122,7 +130,7 @@
 								
 								<p>
 									<label>Details</label>
-									<textarea class="text-input textarea wysiwyg" id="textarea" name="textfield" cols="79" rows="15"></textarea>
+									<textarea class="text-input textarea wysiwyg" id="textarea" name="details" cols="79" rows="15"></textarea>
 								</p>
 								
 								<p>

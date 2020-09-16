@@ -6,5 +6,5 @@ define("DB", 'gamestore');
 
 define ('ROOT', dirname(__FILE__));
 define('BASE_URL', 'http://localhost/PHP-MVC');
-define('UPLOAD_IMG', ROOT .'/images/products');
+define('UPLOAD_IMG', ROOT .'/images/products/');
 

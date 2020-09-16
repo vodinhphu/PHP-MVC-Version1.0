@@ -77,7 +77,7 @@
 			<!-- Sidebar Profile links -->
 			<div id="profile-links">
 				Hello, <a href="<?php echo BASE_URL ?>/admincp/#" title="Edit your profile">
-					<?php echo $_SESSION['admin_login']['name'] ?>
+					<?php echo $_SESSION['admin_login']['username'] ?>
 				</a>, you have <a href="<?php echo BASE_URL ?>/admin.php#messages" rel="modal" title="3 Messages">3 Messages</a><br />
 				<br />
 				<a href="<?php echo BASE_URL ?>/" title="View the Site">View the Site</a> | <a href="<?php echo BASE_URL ?>/index.php?controller=Login&action=logout" title="Sign Out">Sign Out</a>
