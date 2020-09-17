@@ -115,6 +115,9 @@ a{
   border-color: transparent;
   color: #fff !important;
 }
+.modal-content{
+  margin-top: 100px;
+}
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web');
 
         *{
@@ -166,13 +169,13 @@ a{
 </div>
 <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
           <h3 class="title2">Shopping Cart Details</h3>
