@@ -31,6 +31,7 @@
         ?>
         <li><a href="#pricing">PRICING</a></li>
         <li><a href="#contact">CONTACT</a></li>
+        <li><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Cart</button></li>
       </ul>
     </div>
   </div>

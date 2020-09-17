@@ -29,7 +29,57 @@ function index()
 		$subview = 'game_index.php';
 		include "View/trangchu.php";
 	}
+function cart()
+{
 
+    $database_name = "gamestore";
+    $con = mysqli_connect("localhost","root","",$database_name);
+
+    if (isset($_POST["add"])){
+        if (isset($_SESSION["cart"])){
+            $item_array_id = array_column($_SESSION["cart"],"product_id");
+            if (!in_array($_GET["id"],$item_array_id)){
+                $count = count($_SESSION["cart"]);
+                $item_array = array(
+                    'product_id' => $_GET["id"],
+                    'item_name' => $_POST["hidden_name"],
+                    'product_price' => $_POST["hidden_price"],
+                    'item_quantity' => $_POST["quantity"],
+                );
+                $_SESSION["cart"][$count] = $item_array;
+                echo '<script>window.location="index.php?controller=Game&action=cart"</script>';
+            }else{
+                echo '<script>alert("Product is already Added to Cart")</script>';
+                echo '<script>window.location="index.php?controller=Game&action=cart"</script>';
+            }
+        }else{
+            $item_array = array(
+                'product_id' => $_GET["id"],
+                'item_name' => $_POST["hidden_name"],
+                'product_price' => $_POST["hidden_price"],
+                'item_quantity' => $_POST["quantity"],
+            );
+            $_SESSION["cart"][0] = $item_array;
+        }
+    }
+
+    if (isset($_GET["action2"])){
+        if ($_GET["action2"] == "delete"){
+            foreach ($_SESSION["cart"] as $keys => $value){
+                if ($value["product_id"] == $_GET["id"]){
+                    unset($_SESSION["cart"][$keys]);
+                    echo '<script>alert("Product has been Removed...!")</script>';
+                    echo '<script>window.location="index.php?controller=Game&action=cart"</script>';
+                }
+            }
+        }
+    }
+    $data = $this->model->getnGame(5);
+		$data_cat = $this->dataCat;// $this->model->getCat();
+		$data_pub = $this->dataPub;//$this->model->getPub();
+		$subview = 'game_index.php';
+		include "View/trangchu.php";
+}
 function bookCat()
 {
 	$cat_id = getIndex('cat_id');

@@ -12,7 +12,6 @@
 <style>
 body {
     font-family: Arial;
-    width: 550px;
 }
 
 .outer-scontainer {
@@ -97,7 +96,10 @@ $(document).ready(function() {
 
 <body>
     <h2>Import CSV file into Mysql using PHP</h2>
-
+    <?php if (isset($_SESSION['success'])) {
+        echo $_SESSION['success'];
+        unset($_SESSION['success']);
+    } ?>
     <div id="response"
         class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">
         <?php if(!empty($message)) { echo $message; } ?>

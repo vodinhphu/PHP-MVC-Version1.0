@@ -46,6 +46,7 @@ class Admin
         $conn->set_charset("utf8");
 
 		$this->model= new Model_Game();
+		$db = $this->model;
 		$data = $this->model->getGame();
 		if (isset($_POST["import"])) {
 		    
@@ -54,9 +55,13 @@ class Admin
 		    if ($_FILES["file"]["size"] > 0) {
 		        
 		        $file = fopen($fileName, "r");
-		        
+		        $key = 1;
 		        while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
-		            
+		        	$key++;
+		        	if(count($column) < 5){
+		        		var_dump($column);
+		            	break;
+		        	}
 		            $product_id = "";
 		            if (isset($column[0])) {
 		                $product_id = mysqli_real_escape_string($conn, $column[0]);
@@ -98,10 +103,13 @@ class Admin
 		                $quantity_available,
 		                $details
 		            );
-		            $insertId = $this->model->insertPro($sqlInsert, $paramType, $paramArray);
+		            
+		            $insertId = $db->insertPro($sqlInsert, $paramType, $paramArray);
+			        
 		            
 		            if (! empty($insertId)) {
 		                $type = "success";
+		                $_SESSION['success'] = 'success';
 		                $message = "CSV Data Imported into the Database";
 		            } else {
 		                $type = "error";
@@ -110,7 +118,9 @@ class Admin
 		        }
 		    }
 		}
-		header('location:index.php?controller=Admin&action=import');
+		header("Location: http://localhost/PHP-MVC/index.php?controller=Admin&action=import");
+		die();
+		// include ROOT ."/View/subview/import.php";
 	}
 	function deletebook()
 	{

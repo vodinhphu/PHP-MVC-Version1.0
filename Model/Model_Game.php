@@ -1,7 +1,8 @@
 <?php
 class Model_Game extends Database
 {
-	
+
+
 	function insertPro($sqlInsert, $paramType, $paramArray)
 	{
 		return $this->insert($sqlInsert, $paramType, $paramArray);
@@ -13,7 +14,7 @@ class Model_Game extends Database
 
 	function getnGame($n)
 	{
-		return $this->selectQuery('select * from game limit 0, 8');
+		return $this->selectQuery('select * from game where quantity_available > 0 limit 0, 8');
 	}
 
 	function getCat()
